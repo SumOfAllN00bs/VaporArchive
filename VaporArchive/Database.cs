@@ -42,7 +42,7 @@ namespace VaporArchive
                     acc.AccountCreated = DateTime.Now;
                     var saltedPassword = _password + Helper.GetEncryptionKey(acc.AccountCreated.Day);
                     HMACSHA256 hashed = new HMACSHA256(Helper.GetEncryptionKey());
-                    acc.PasswordHash =  Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
+                    acc.PasswordHash = Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
                     acc.UserName = _username;
                     //add acc to proper table
                     if (_accountType == 1)

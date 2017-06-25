@@ -47,7 +47,6 @@ namespace VaporArchive
                         return;
                     }
                 }
-                
             }
             catch (Exception ex)
             {
@@ -61,7 +60,6 @@ namespace VaporArchive
             {
                 return _RootDirectory;
             }
-
             set
             {
                 _RootDirectory = value;

@@ -49,7 +49,7 @@ namespace VaporArchive
                 default:
                     break;
             }
-            if(P != null)P.Setup();
+            if (P != null) P.Setup();
             else
             {
                 MessageBox.Show("Some unknown error occured");
@@ -78,6 +78,7 @@ namespace VaporArchive
             MainWindow mw = new MainWindow();
             mw.Show();
             Application.Current.Properties.Remove("Username");
+            Application.Current.Properties.Remove("AccountType");
             Application.Current.MainWindow = mw;
             Close();
         }

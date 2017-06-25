@@ -15,7 +15,10 @@ namespace VaporArchive
 
         public override void Setup()
         {
-            throw new NotImplementedException();
+            Tab.Items.Clear();
+            TabItem ti = new TabItem();
+            ti.Header = "Archive Of Games";
+            Tab.Items.Add(ti);
         }
     }
 }
