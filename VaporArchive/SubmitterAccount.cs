@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VaporArchive
 {
-    class SubmitterAccount : Account
+    public class SubmitterAccount : Account
     {
         public virtual List<Game> GamesSubmitted { get; set; }
 

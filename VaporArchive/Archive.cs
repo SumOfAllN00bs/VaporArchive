@@ -11,6 +11,14 @@ namespace VaporArchive
     public class Archive
     {
         string _RootDirectory = "";
+        public List<Game> Games
+        {
+            get
+            {
+                Database db = new Database();
+                return db.GetGames();
+            }
+        }
         public Archive() : this("")
         {
         }

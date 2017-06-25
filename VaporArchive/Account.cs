@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VaporArchive
 {
-    class Account
+    public class Account
     {
         [Key]
         public int AccountID { get; set; }

@@ -188,5 +188,39 @@ namespace VaporArchive
             }
             return "";
         }
+
+        //Games
+        public List<Game> GetGames()
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    List<Game> AllGames = dbContext.Games.ToList();
+                    return AllGames;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return null;
+        }
+        public List<Game> GetGamesBySubmitter(string _username)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    List<Game> AllGames = dbContext.Games.Where(g => g.Submitter.UserName == _username).ToList();
+                    return AllGames;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return null;
+        }
     }
 }
