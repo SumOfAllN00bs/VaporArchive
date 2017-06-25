@@ -1,0 +1,20 @@
+﻿<Window x:Class="VaporArchive.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VaporArchive"
+        mc:Ignorable="d"
+        Title="Login" Height="480" Width="640"
+        FontFamily="Iosevka">
+    <Grid>
+
+        <Label x:Name="lbl_UserName" FontSize="14" Content="User Name:" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_Password" FontSize="14" Content="Password:" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_UserName" HorizontalAlignment="Center" Height="23" Margin="0,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <TextBox x:Name="txt_Password" HorizontalAlignment="Center" Height="23" Margin="0,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <Button x:Name="btn_Login" FontSize="14" Content="Login" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" Width="56"/>
+        <Button x:Name="btn_Register" FontSize="14" Content="Create new account" HorizontalAlignment="Center" Margin="0,398,0,0" VerticalAlignment="Top" Width="132" Click="btn_Register_Click"/>
+
+    </Grid>
+</Window>
