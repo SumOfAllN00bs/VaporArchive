@@ -1,6 +1,6 @@
 -hash
-confirm login
-account management
+-confirm login
+-account management
 game management
 archive list
 file management

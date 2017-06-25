@@ -31,6 +31,16 @@ namespace VaporArchive
 
         private void btn_CreateNewAccount_Click(object sender, RoutedEventArgs e)
         {
+            if (!Helper.CheckValidText(txt_UserName.Text, "username"))
+            {
+                MessageBox.Show("Failed");
+                return;
+            }
+            if (!Helper.CheckValidText(pwd_Password.Password, "password"))
+            {
+                MessageBox.Show("Failed");
+                return;
+            }
             Database db = new Database();
             int acctype = -1;
             acctype = (rb_Customer.IsChecked ?? false) ? 1 : acctype;

@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:VaporArchive"
         mc:Ignorable="d"
         Title="Management Portal" Height="600" Width="800"
-        FontFamily="Iosevka">
+        FontFamily="Iosevka" Loaded="Window_Loaded">
     <Grid>
         <TabControl x:Name="tc_Portal" HorizontalAlignment="Left" Height="525" Margin="10,34,0,0" VerticalAlignment="Top" Width="772">
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        <Button x:Name="btn_MyAccount" Content="My Account" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_MyAccount" Content="My Account" HorizontalAlignment="Left" Margin="645,10,0,0" VerticalAlignment="Top" Width="76" Click="btn_MyAccount_Click"/>
+        <Label x:Name="lbl_Welcome" Content="Welcome:" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_Logout" Content="Logout →" HorizontalAlignment="Left" Margin="726,10,0,0" VerticalAlignment="Top" Width="56" Click="Logout_Click"/>
 
     </Grid>
 </Window>

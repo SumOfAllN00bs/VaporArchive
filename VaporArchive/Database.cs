@@ -17,6 +17,12 @@ namespace VaporArchive
             {
                 try
                 {
+                    var account = dbContext.Accounts.Where(a => a.UserName == _username).FirstOrDefault();
+                    if (account != null)
+                    {
+                        MessageBox.Show("Username taken!");
+                        return false;
+                    }
                     Account acc = new Account();
                     if (_accountType == -1)
                     {
@@ -76,6 +82,7 @@ namespace VaporArchive
                     var PasswordHashed = Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
                     if (PasswordHashed == acc.PasswordHash)
                     {
+                        Application.Current.Properties.Add("Username", acc.UserName);
                         return true;
                     }
                     else
@@ -88,6 +95,61 @@ namespace VaporArchive
 
 
             }
+        }
+        public bool AlterAccount(string _username, string _password)
+        {
+            using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+            {
+                try
+                {
+                    var username = (string)Application.Current.Properties["Username"];
+                    Account acc = dbContext.Accounts.Where(a => a.UserName == username).FirstOrDefault();
+                    if (acc == null)
+                    {
+                        MessageBox.Show("Error: Can not alter account that does not exist");
+                        return false;
+                    }
+                    //fill in account type independent data
+                    var saltedPassword = _password + Helper.GetEncryptionKey(acc.AccountCreated.Day);
+                    HMACSHA256 hashed = new HMACSHA256(Helper.GetEncryptionKey());
+                    acc.PasswordHash = Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
+                    acc.UserName = _username;
+                    Application.Current.Properties["Username"] = acc.UserName;
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            return false;
+        }
+        public bool RemoveAccount(string _username)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    Account acc = dbContext.Accounts.Where(a => a.UserName == _username).FirstOrDefault();
+                    if (acc == null)
+                    {
+                        MessageBox.Show("Could not find account to delete");
+                        return false;
+                    }
+                    else
+                    {
+                        dbContext.Accounts.Remove(acc);
+                        dbContext.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return false;
         }
     }
 }

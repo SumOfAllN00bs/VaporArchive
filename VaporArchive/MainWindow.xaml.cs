@@ -71,7 +71,7 @@ namespace VaporArchive
                                          select a).FirstOrDefault();
                     if (acc == null)
                     {
-                        MessageBox.Show("Can't find account or password combination");
+                        MessageBox.Show("Can't find username and password combination");
                     }
                     else
                     {
