@@ -170,6 +170,10 @@ namespace VaporArchive
                         {
                             return "Submitter";
                         }
+                        else
+                        {
+                            return "SysAdmin";
+                        }
                     }
                     else
                     {

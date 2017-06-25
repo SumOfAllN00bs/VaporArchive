@@ -9,7 +9,7 @@ namespace VaporArchive
 {
     class SysAdminPortal : Portal
     {
-        SysAdminPortal(TabControl tbControl) : base(tbControl)
+        public SysAdminPortal(TabControl tbControl) : base(tbControl)
         {
 
         }
