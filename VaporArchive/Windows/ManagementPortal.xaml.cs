@@ -33,6 +33,16 @@ namespace VaporArchive
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Archive Root = new Archive();
+            switch (Application.Current.Properties["AccountType"].ToString())
+            {
+                case "Customer":
+                    break;
+                case "Submitter":
+                    break;
+                default:
+                    break;
+            }
             UpdateView();
         }
         public void UpdateView()

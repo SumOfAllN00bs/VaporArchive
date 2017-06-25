@@ -11,6 +11,7 @@ namespace VaporArchive
 {
     class Database
     {
+        //Accounts
         public bool CreateAccount(string _username, string _password, int _accountType)
         {
             using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
@@ -83,6 +84,7 @@ namespace VaporArchive
                     if (PasswordHashed == acc.PasswordHash)
                     {
                         Application.Current.Properties.Add("Username", acc.UserName);
+                        Application.Current.Properties.Add("AccountType", GetAccountType(acc.UserName));
                         return true;
                     }
                     else
@@ -150,6 +152,37 @@ namespace VaporArchive
                 MessageBox.Show("Error: " + ex.Message);
             }
             return false;
+        }
+        public string GetAccountType(string _username)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    Account acc = dbContext.Accounts.Where(a => a.UserName == _username).FirstOrDefault();
+                    if (acc != null)
+                    {
+                        if (dbContext.Customers.Where(c => c.AccountID == acc.AccountID).Any())
+                        {
+                            return "Customer";
+                        }
+                        else if (dbContext.Submitters.Where(s => s.AccountID == acc.AccountID).Any())
+                        {
+                            return "Submitter";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Account missing with Username: " + _username);
+                        return "";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return "";
         }
     }
 }
