@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Windows;
+using System.Security.Cryptography;
 
 namespace VaporArchive
 {
@@ -30,6 +31,12 @@ namespace VaporArchive
                     {
                         acc = new SubmitterAccount();
                     }
+                    //fill in account type independent data
+                    acc.AccountCreated = DateTime.Now;
+                    var saltedPassword = _password + Helper.GetEncryptionKey(acc.AccountCreated.Day);
+                    HMACSHA256 hashed = new HMACSHA256(Helper.GetEncryptionKey());
+                    acc.PasswordHash =  Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
+                    acc.UserName = _username;
                     //add acc to proper table
                     if (_accountType == 1)
                     {
@@ -40,10 +47,6 @@ namespace VaporArchive
                     {
                         dbContext.Submitters.Add((SubmitterAccount)acc);
                     }
-                    //fill in account type independent data
-                    acc.AccountCreated = DateTime.Now;
-                    acc.Password = _password;
-                    acc.UserName = _username;
                     dbContext.SaveChanges();
                     return true;
                 }
@@ -53,6 +56,38 @@ namespace VaporArchive
                 }
             }
             return false;
+        }
+        public bool Login(string _username, string _password)
+        {
+            using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+            {
+                Account acc = (from a in dbContext.Accounts
+                               where a.UserName == _username
+                               select a).FirstOrDefault();
+                if (acc == null)
+                {
+                    MessageBox.Show("Can't find account or password combination");
+                    return false;
+                }
+                else
+                {
+                    HMACSHA256 hashed = new HMACSHA256(Helper.GetEncryptionKey());
+                    var saltedPassword = _password + Helper.GetEncryptionKey(acc.AccountCreated.Day);
+                    var PasswordHashed = Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
+                    if (PasswordHashed == acc.PasswordHash)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can't find account or password combination");
+                        return false;
+                    }
+
+                }
+
+
+            }
         }
     }
 }

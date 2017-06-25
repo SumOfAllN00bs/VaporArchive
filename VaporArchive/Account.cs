@@ -18,9 +18,10 @@ namespace VaporArchive
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Password { get; set; }
+        [StringLength(1000)]
+        public string PasswordHash { get; set; }
 
+        [Required]
         public DateTime AccountCreated { get; set; }
     }
 }

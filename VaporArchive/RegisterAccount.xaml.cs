@@ -36,6 +36,14 @@ namespace VaporArchive
             acctype = (rb_Customer.IsChecked ?? false) ? 1 : acctype;
             acctype = (rb_Submitter.IsChecked ?? false) ? 2 : acctype;
             if (!db.CreateAccount(txt_UserName.Text, pwd_Password.Password, acctype)) MessageBox.Show("Failed to create account");
+            else
+            {
+                MessageBoxResult MBResult = MessageBox.Show("If you want to create another account press ok, otherwise to login press cancel", "Done creating account?", MessageBoxButton.OKCancel);
+                if (MBResult == MessageBoxResult.Cancel)
+                {
+                    Close();
+                }
+            }
         }
     }
 }
