@@ -70,6 +70,7 @@
     <Compile Include="Portals\CustomerPortal.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="SubmitterArchive.cs" />
     <Compile Include="Windows\ManagementPortal.xaml.cs">
       <DependentUpon>ManagementPortal.xaml</DependentUpon>
     </Compile>

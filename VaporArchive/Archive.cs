@@ -11,7 +11,7 @@ namespace VaporArchive
     public class Archive
     {
         string _RootDirectory = "";
-        public List<Game> Games
+        public virtual List<Game> Games
         {
             get
             {

@@ -15,7 +15,8 @@ namespace VaporArchive
         {
             Tab = tbControl;
         }
-        public abstract void Setup();
+        public abstract void Setup(); //create the tab items and controls to go on tab items
+        public abstract void Refresh(); //reset any datagrids and clear any text from controls
         //public abstract void Destroy();
     }
 }

@@ -9,17 +9,26 @@ namespace VaporArchive
 {
     class SubmitterPortal : Portal
     {
+        //Tabs
+        TabItem GamesTI = new TabItem();
+        TabItem ArchiveTI = new TabItem();
+
+        //Controls
+
+
         public SubmitterPortal(TabControl tbControl) : base(tbControl)
         {
+        }
+
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
         }
 
         public override void Setup()
         {
             Tab.Items.Clear();
-
-            TabItem GamesTI = new TabItem();
-            TabItem ArchiveTI = new TabItem();
-
+             
             GamesTI.Header = "Games List"; //Lists all games of submitter
             ArchiveTI.Header = "Archive Of Games"; //Controls Archive structure and other options for submitter
 
