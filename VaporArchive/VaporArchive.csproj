@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,7 +68,6 @@
     <Compile Include="Account.cs" />
     <Compile Include="Archive.cs" />
     <Compile Include="ArchiveDatabaseContext.cs" />
-    <Compile Include="Portals\CustomerPortal.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="SubmitterArchive.cs" />
@@ -94,13 +94,10 @@
     <Compile Include="Windows\MyAccount.xaml.cs">
       <DependentUpon>MyAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Portals\Portal.cs" />
     <Compile Include="Windows\RegisterAccount.xaml.cs">
       <DependentUpon>RegisterAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="SubmitterAccount.cs" />
-    <Compile Include="Portals\SubmitterPortal.cs" />
-    <Compile Include="Portals\SysAdminPortal.cs" />
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -159,6 +156,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Game.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -168,6 +166,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

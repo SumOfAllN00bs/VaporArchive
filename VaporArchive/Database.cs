@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Windows;
 using System.Security.Cryptography;
+using System.Collections.ObjectModel;
 
 namespace VaporArchive
 {
@@ -188,6 +189,54 @@ namespace VaporArchive
             }
             return "";
         }
+        public CustomerAccount GetCustomerAccountByName(string _username)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    CustomerAccount acc = dbContext.Customers.Where(a => a.UserName == _username).FirstOrDefault();
+                    if (acc != null)
+                    {
+                        return acc;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Account missing with Username: " + _username);
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return null;
+        }
+        public SubmitterAccount GetSubmitterAccountByName(string _username)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    SubmitterAccount acc = dbContext.Submitters.Where(a => a.UserName == _username).FirstOrDefault();
+                    if (acc != null)
+                    {
+                        return acc;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Account missing with Username: " + _username);
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return null;
+        }
 
         //Games
         public List<Game> GetGames()
@@ -196,7 +245,7 @@ namespace VaporArchive
             {
                 using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
                 {
-                    List<Game> AllGames = dbContext.Games.ToList();
+                    List<Game> AllGames = new List<Game>(dbContext.Games);
                     return AllGames;
                 }
             }
@@ -212,7 +261,7 @@ namespace VaporArchive
             {
                 using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
                 {
-                    List<Game> AllGames = dbContext.Games.Where(g => g.Submitter.UserName == _username).ToList();
+                    List<Game> AllGames = new List<Game>( dbContext.Games.Where(g => g.Submitter.UserName == _username));
                     return AllGames;
                 }
             }

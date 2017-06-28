@@ -44,51 +44,5 @@ namespace VaporArchive
             }
         }
 
-        //testing
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
-            {
-                try
-                {
-                    //create
-                    Account acc = new CustomerAccount();
-
-                    //fill in account type independent data
-                    acc.AccountCreated = DateTime.Now;
-                    var saltedPassword = "vS4n7YQ3eh8vnpAH" + acc.AccountCreated.Ticks.ToString();
-                    HMACSHA256 hashed = new HMACSHA256(Helper.GetEncryptionKey());
-                    acc.PasswordHash = Convert.ToBase64String(hashed.ComputeHash(Encoding.Unicode.GetBytes(saltedPassword)));
-                    acc.UserName = "sysadmin";
-                    //add acc to proper table
-                    dbContext.Customers.Add((CustomerAccount)acc);
-
-                    dbContext.SaveChanges();
-
-                    //test
-                    Account accToTest = (from a in dbContext.Accounts
-                                         where a.UserName == "sysadmin"
-                                         select a).FirstOrDefault();
-                    if (acc == null)
-                    {
-                        MessageBox.Show("Can't find username and password combination");
-                    }
-                    else
-                    {
-                        HMACSHA256 hashed2 = new HMACSHA256(Helper.GetEncryptionKey());
-                        var salt2 = "vS4n7YQ3eh8vnpAH" + acc.AccountCreated.Ticks.ToString();
-                        var PasswordHashed = Convert.ToBase64String(hashed2.ComputeHash(Encoding.Unicode.GetBytes(salt2)));
-                        if (PasswordHashed == accToTest.PasswordHash)
-                        {
-                            MessageBox.Show("Success");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
-        }
     }
 }

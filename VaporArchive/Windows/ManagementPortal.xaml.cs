@@ -19,6 +19,7 @@ namespace VaporArchive
     /// </summary>
     public partial class ManagementPortal : Window
     {
+        Archive Root = new Archive();
         public ManagementPortal()
         {
             InitializeComponent();
@@ -33,29 +34,21 @@ namespace VaporArchive
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Archive Root = new Archive();
-            Portal P = null;
             switch (Application.Current.Properties["AccountType"].ToString())
             {
                 case "Customer":
-                    P = new CustomerPortal(tc_Portal);
                     break;
                 case "Submitter":
-                    P = new SubmitterPortal(tc_Portal);
                     break;
                 case "SysAdmin":
-                    P = new SysAdminPortal(tc_Portal);
                     break;
                 default:
                     break;
             }
-            if (P != null) P.Setup();
-            else
-            {
-                MessageBox.Show("Some unknown error occured");
-                return;
-            }
             UpdateView();
+            System.Windows.Data.CollectionViewSource gameViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("gameViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            gameViewSource.Source = new Database().GetGames();
         }
         public void UpdateView()
         {

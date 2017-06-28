@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -43,17 +44,10 @@ namespace VaporArchive
                 else
                 {
                     var cwd = Directory.GetCurrentDirectory();
-                    var archiveDirectory = cwd + @"\" + root;
-                    if (cwd.Split('\\').LastOrDefault() == "Archive")
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(archiveDirectory);
-                        RootDirectory = archiveDirectory;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error");
-                        return;
-                    }
+                    var archiveDirectory = cwd + @"\" + "Archive" + @"\" + root; //current working directory or cwd is going to be the folder that contains Archive and inside Archive 
+                                                                                 //are all the folders that correspond to the submitters name and in those folders are the actual games per submitter
+                    DirectoryInfo di = Directory.CreateDirectory(archiveDirectory);
+                    RootDirectory = archiveDirectory;
                 }
             }
             catch (Exception ex)
