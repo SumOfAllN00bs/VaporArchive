@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace VaporArchive
 {
-    public class Game
+    public class Game : INotifyPropertyChanged
     {
         [Key]
         public int GameID { get; set; }
@@ -22,5 +23,16 @@ namespace VaporArchive
         [Required]
         public virtual SubmitterAccount Submitter { get; set; }
         public virtual List<CustomerAccount> Customers { get; set; }
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }

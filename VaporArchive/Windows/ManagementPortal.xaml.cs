@@ -45,10 +45,9 @@ namespace VaporArchive
                 default:
                     break;
             }
+            Database db = new Database();
+            dg_Games.ItemsSource = db.GetGames();
             UpdateView();
-            System.Windows.Data.CollectionViewSource gameViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("gameViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            gameViewSource.Source = new Database().GetGames();
         }
         public void UpdateView()
         {

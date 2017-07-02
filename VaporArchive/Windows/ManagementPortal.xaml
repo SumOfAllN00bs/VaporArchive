@@ -14,35 +14,29 @@
         <TabControl x:Name="tc_Portal" HorizontalAlignment="Left" Height="525" Margin="10,34,0,0" VerticalAlignment="Top" Width="772">
             <TabItem Header="All Games">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_Games" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding }" Margin="2,4,0,133" RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid x:Name="dg_Games" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding }" Margin="2,4,0,133" RowDetailsVisibilityMode="VisibleWhenSelected">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="gameIDColumn" Binding="{Binding GameID}" Header="Game ID" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="filePathColumn" Binding="{Binding FilePath}" Header="File Path" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="genreColumn" Binding="{Binding Genre}" Header="Genre" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="sizeKBColumn" Binding="{Binding SizeKB}" Header="Size KB" Width="SizeToHeader"/>
-                            <DataGridTemplateColumn x:Name="submissionDateColumn" Header="Submission Date" Width="SizeToHeader">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding SubmissionDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn x:Name="gameIDColumn" Binding="{Binding GameID}" Header="Game ID" Width="Auto"/>
+                            <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="Auto"/>
+                            <DataGridTextColumn x:Name="filePathColumn" Binding="{Binding FilePath}" Header="File Path" Width="Auto"/>
+                            <DataGridTextColumn x:Name="genreColumn" Binding="{Binding Genre}" Header="Genre" Width="Auto"/>
+                            <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="Auto"/>
+                            <DataGridTextColumn x:Name="sizeKBColumn" Binding="{Binding SizeKB}" Header="Size KB" Width="Auto"/>
+                            <DataGridTextColumn x:Name="submissionDateColumn" Binding="{Binding SubmissionDate}"  Header="Submission Date" Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label Content="Game Title" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top"/>
                     <Label Content="Game File Path" HorizontalAlignment="Left" Margin="200,370,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Game Genre" HorizontalAlignment="Left" Margin="411,370,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Game Size" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Game Price" HorizontalAlignment="Left" Margin="623,370,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Game Submission Date" HorizontalAlignment="Left" Margin="200,428,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txt_GameTitle" HorizontalAlignment="Left" Height="23" Margin="10,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Title}" VerticalAlignment="Top" Width="168"/>
-                    <TextBox x:Name="txt_GamePrice"  HorizontalAlignment="Left" Height="23" Margin="623,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Price}" VerticalAlignment="Top" Width="133"/>
-                    <TextBox x:Name="txt_GameGenre"  HorizontalAlignment="Left" Height="23" Margin="411,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Genre}" VerticalAlignment="Top" Width="168"/>
-                    <TextBox x:Name="txt_GamePath"  HorizontalAlignment="Left" Height="23" Margin="200,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.FilePath}" VerticalAlignment="Top" Width="168"/>
-                    <TextBox x:Name="txt_GameSize"  HorizontalAlignment="Left" Height="23" Margin="10,458,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SizeKB}" VerticalAlignment="Top" Width="168"/>
-                    <TextBox x:Name="txt_GameSubmissionDate"  HorizontalAlignment="Left" Height="23" Margin="200,458,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SubmissionDate}" VerticalAlignment="Top" Width="168"/>
+                    <Label Content="Game Genre" HorizontalAlignment="Left" Margin="588,370,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Game Size" HorizontalAlignment="Left" Margin="200,435,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Game Price" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Game Submission Date" HorizontalAlignment="Left" Margin="390,435,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt_GameTitle" HorizontalAlignment="Left" Height="23" Margin="10,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Title}" VerticalAlignment="Top" Width="185"/>
+                    <TextBox x:Name="txt_GamePrice"  HorizontalAlignment="Left" Height="23" Margin="10,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Price}" VerticalAlignment="Top" Width="185"/>
+                    <TextBox x:Name="txt_GameGenre"  HorizontalAlignment="Left" Height="23" Margin="588,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Genre}" VerticalAlignment="Top" Width="168"/>
+                    <TextBox x:Name="txt_GamePath"  HorizontalAlignment="Left" Height="23" Margin="200,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.FilePath}" VerticalAlignment="Top" Width="383"/>
+                    <TextBox x:Name="txt_GameSize"  HorizontalAlignment="Left" Height="23" Margin="200,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SizeKB}" VerticalAlignment="Top" Width="185"/>
+                    <TextBox x:Name="txt_GameSubmissionDate"  HorizontalAlignment="Left" Height="23" Margin="390,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SubmissionDate}" VerticalAlignment="Top" Width="193"/>
                 </Grid>
             </TabItem>
             <TabItem Header="All Archives">
