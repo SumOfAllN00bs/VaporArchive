@@ -13,7 +13,7 @@ namespace VaporArchive.Migrations
                     {
                         AccountID = c.Int(nullable: false, identity: true),
                         UserName = c.String(nullable: false, maxLength: 100),
-                        Password = c.String(nullable: false, maxLength: 100),
+                        PasswordHash = c.String(nullable: false, maxLength: 1000),
                         AccountCreated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.AccountID);
@@ -29,7 +29,8 @@ namespace VaporArchive.Migrations
                         SubmissionDate = c.DateTime(nullable: false),
                         Price = c.Int(nullable: false),
                         Genre = c.String(),
-                        Submitter_AccountID = c.Int(nullable: false),
+                        SubmitterID = c.Int(nullable: false),
+                        Submitter_AccountID = c.Int(),
                     })
                 .PrimaryKey(t => t.GameID)
                 .ForeignKey("dbo.Submitters", t => t.Submitter_AccountID)
@@ -52,35 +53,33 @@ namespace VaporArchive.Migrations
                 "dbo.Customers",
                 c => new
                     {
-                        AccountID = c.Int(nullable: false),
                         CustomerID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.AccountID)
-                .ForeignKey("dbo.Accounts", t => t.AccountID)
-                .Index(t => t.AccountID);
+                .PrimaryKey(t => t.CustomerID)
+                .ForeignKey("dbo.Accounts", t => t.CustomerID)
+                .Index(t => t.CustomerID);
             
             CreateTable(
                 "dbo.Submitters",
                 c => new
                     {
-                        AccountID = c.Int(nullable: false),
                         SubmitterID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.AccountID)
-                .ForeignKey("dbo.Accounts", t => t.AccountID)
-                .Index(t => t.AccountID);
+                .PrimaryKey(t => t.SubmitterID)
+                .ForeignKey("dbo.Accounts", t => t.SubmitterID)
+                .Index(t => t.SubmitterID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Submitters", "AccountID", "dbo.Accounts");
-            DropForeignKey("dbo.Customers", "AccountID", "dbo.Accounts");
+            DropForeignKey("dbo.Submitters", "SubmitterID", "dbo.Accounts");
+            DropForeignKey("dbo.Customers", "CustomerID", "dbo.Accounts");
             DropForeignKey("dbo.Games", "Submitter_AccountID", "dbo.Submitters");
             DropForeignKey("dbo.GameCustomerAccounts", "CustomerAccount_AccountID", "dbo.Customers");
             DropForeignKey("dbo.GameCustomerAccounts", "Game_GameID", "dbo.Games");
-            DropIndex("dbo.Submitters", new[] { "AccountID" });
-            DropIndex("dbo.Customers", new[] { "AccountID" });
+            DropIndex("dbo.Submitters", new[] { "SubmitterID" });
+            DropIndex("dbo.Customers", new[] { "CustomerID" });
             DropIndex("dbo.GameCustomerAccounts", new[] { "CustomerAccount_AccountID" });
             DropIndex("dbo.GameCustomerAccounts", new[] { "Game_GameID" });
             DropIndex("dbo.Games", new[] { "Submitter_AccountID" });

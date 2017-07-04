@@ -10,11 +10,13 @@
     <Window.Resources>
         <CollectionViewSource x:Key="gameViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Game}, CreateList=True}"/>
     </Window.Resources>
-    <Grid >
+    <Grid DataContext="{StaticResource gameViewSource}">
         <TabControl x:Name="tc_Portal" HorizontalAlignment="Left" Height="525" Margin="10,34,0,0" VerticalAlignment="Top" Width="772">
             <TabItem Header="All Games">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_Games" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding }" Margin="2,4,0,133" RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid x:Name="dg_Games" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                              ItemsSource="{Binding}" 
+                              Margin="2,4,0,133" RowDetailsVisibilityMode="VisibleWhenSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="gameIDColumn" Binding="{Binding GameID}" Header="Game ID" Width="Auto"/>
                             <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="Auto"/>
@@ -30,26 +32,25 @@
                     <Label Content="Game Genre" HorizontalAlignment="Left" Margin="588,370,0,0" VerticalAlignment="Top"/>
                     <Label Content="Game Size" HorizontalAlignment="Left" Margin="200,435,0,0" VerticalAlignment="Top"/>
                     <Label Content="Game Price" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Game Submission Date" HorizontalAlignment="Left" Margin="588,435,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Game Submission Date" HorizontalAlignment="Left" Margin="390,435,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txt_GameTitle" HorizontalAlignment="Left" Height="23" Margin="10,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Title}" VerticalAlignment="Top" Width="185"/>
                     <TextBox x:Name="txt_GamePrice"  HorizontalAlignment="Left" Height="23" Margin="10,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Price}" VerticalAlignment="Top" Width="185"/>
                     <TextBox x:Name="txt_GameGenre"  HorizontalAlignment="Left" Height="23" Margin="588,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.Genre}" VerticalAlignment="Top" Width="168"/>
                     <TextBox x:Name="txt_GamePath"  HorizontalAlignment="Left" Height="23" Margin="200,400,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.FilePath}" VerticalAlignment="Top" Width="383"/>
                     <TextBox x:Name="txt_GameSize"  HorizontalAlignment="Left" Height="23" Margin="200,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SizeKB}" VerticalAlignment="Top" Width="185" />
-                    <TextBox x:Name="txt_GameSubmissionDate"  HorizontalAlignment="Left" Height="23" Margin="588,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SubmissionDate}" VerticalAlignment="Top" Width="193"/>
+                    <TextBox x:Name="txt_GameSubmissionDate"  HorizontalAlignment="Left" Height="23" Margin="390,465,0,0" TextWrapping="Wrap" Text="{Binding ElementName=dg_Games, Path=SelectedItem.SubmissionDate}" VerticalAlignment="Top" Width="193"/>
+                    <Button x:Name="btn_SaveChanges" Content="Save Changes" HorizontalAlignment="Left" Margin="588,465,0,0" VerticalAlignment="Top" Width="168" Height="23" Click="btn_SaveChanges_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="All Archives">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="All Accounts">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="My Archive">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Submit Game">
+                <Grid>
+                    
+                </Grid>
             </TabItem>
             <TabItem Header="My Games">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid>
+                    
+                </Grid>
             </TabItem>
         </TabControl>
         <Button x:Name="btn_MyAccount" Content="My Account" HorizontalAlignment="Left" Margin="645,10,0,0" VerticalAlignment="Top" Width="76" Click="btn_MyAccount_Click"/>

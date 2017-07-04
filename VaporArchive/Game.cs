@@ -21,6 +21,7 @@ namespace VaporArchive
         public int Price { get; set; }
         public string Genre { get; set; }
         [Required]
+        public int SubmitterID { get; set; }
         public virtual SubmitterAccount Submitter { get; set; }
         public virtual List<CustomerAccount> Customers { get; set; }
 

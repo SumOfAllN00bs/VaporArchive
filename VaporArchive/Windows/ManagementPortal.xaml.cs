@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.Entity;
+using System.ComponentModel;
 
 namespace VaporArchive
 {
@@ -19,7 +21,8 @@ namespace VaporArchive
     /// </summary>
     public partial class ManagementPortal : Window
     {
-        Archive Root = new Archive();
+        //Archive Root = new Archive();
+        ArchiveDatabaseContext _archive = new ArchiveDatabaseContext();
         public ManagementPortal()
         {
             InitializeComponent();
@@ -34,6 +37,11 @@ namespace VaporArchive
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CollectionViewSource gameViewSource = ((CollectionViewSource)(this.FindResource("gameViewSource")));
+            if (gameViewSource == null)
+            {
+                MessageBox.Show("Error: gameviewsource is null");
+            }
             switch (Application.Current.Properties["AccountType"].ToString())
             {
                 case "Customer":
@@ -45,8 +53,9 @@ namespace VaporArchive
                 default:
                     break;
             }
-            Database db = new Database();
-            dg_Games.ItemsSource = db.GetGames();
+            _archive.Games.Load();
+            gameViewSource.Source = _archive.Games.Local;
+
             UpdateView();
         }
         public void UpdateView()
@@ -73,6 +82,19 @@ namespace VaporArchive
             Application.Current.Properties.Remove("AccountType");
             Application.Current.MainWindow = mw;
             Close();
+        }
+
+        private void btn_SaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+
+            _archive.SaveChanges();
+            dg_Games.Items.Refresh();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            _archive.Dispose();
         }
     }
 }

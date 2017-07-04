@@ -2,7 +2,5 @@
 -confirm login
 -account management
 game management
-archive list
-file management
 vS4n7YQ3eh8vnpAH
 MQCpsswrd101
