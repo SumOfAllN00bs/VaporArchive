@@ -43,8 +43,9 @@ select * from Accounts
 --(4),
 --(5)
 ----create Games
---insert into Games
---values ('Lotto', 'Archive\John And Harry\Lotto.zip', 59, '2017-06-28 11:17:59.600', 0, 'Gambling',3,3 );
+
+insert into Games
+values ('Lotto', 'Archive\John And Harry\Lotto.zip', 59, '2017-06-28 11:17:59.600', 0, 'Gambling',3,3 );
 --insert into Games
 --values ('Russian Roulette', 'Archive\John And Harry\RussianRouletteAssessment.zip', 20243, '2017-06-28 11:17:59.600', 0, 'Gambling',3 ,3 );
 --insert into Games
@@ -53,4 +54,5 @@ select * from Accounts
 --values ('MessagesSoManyMessages', 'Archive\a\MessagesSoManyMessages.zip', 53, '2017-06-29 11:17:59.600', 0, 'Greetings',4 ,4 );
 --insert into Games
 --values ('TheBettingGame', 'Archive\Mary Quite Contrary\TheBettingGame.zip', 3844, '2017-06-30 11:17:59.600', 0, 'Gambling',5 ,5 );
+select * from Games
 ------------reset for testing-----------------

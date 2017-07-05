@@ -89,7 +89,6 @@ namespace VaporArchive
 
         private void btn_SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-
             _archive.SaveChanges();
             dg_Games.Items.Refresh();
             dg_MyGames.Items.Refresh();
@@ -117,17 +116,49 @@ namespace VaporArchive
                 case "Submitter":
                     if (dg_MyGames.SelectedIndex >= 0 && dg_MyGames.SelectedIndex < dg_MyGames.Items.Count)
                     {
-                        Database db = new Database();
-                        db.RemoveGameByName(((Game)dg_MyGames.SelectedItem).Title);
-                        dg_MyGames.Items.Refresh();
+                        Game _game = _archive.Games.Where(g => g.Title == ((Game)dg_MyGames.SelectedItem).Title).FirstOrDefault();
+                        if (_game != null)
+                        {
+                            _archive.Games.Remove(_game);
+                            _archive.SaveChanges();
+                            _archive.Games.Load();
+                            //REBINDING WORKS finally that took forever
+                            Binding bd1 = new Binding();
+                            bd1.Source = _archive.Games.Local.Where(g => g.Submitter.UserName == Application.Current.Properties["Username"].ToString()).ToList();
+                            dg_MyGames.SetBinding(DataGrid.ItemsSourceProperty, bd1);
+                            /*
+                            Database db = new Database();
+                            db.RemoveGameByName(((Game)dg_MyGames.SelectedItem).Title);
+                            dg_MyGames.Items.Refresh();*/
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error could not find Game");
+                        }
                     }
                     break;
                 case "SysAdmin":
                     if (dg_Games.SelectedIndex >= 0 && dg_Games.SelectedIndex < dg_Games.Items.Count)
                     {
-                        Database db = new Database();
-                        db.RemoveGameByName(((Game)dg_Games.SelectedItem).Title);
-                        dg_Games.Items.Refresh();
+                        Game _game = _archive.Games.Where(g => g.Title == ((Game)dg_Games.SelectedItem).Title).FirstOrDefault();
+                        if (_game != null)
+                        {
+                            _archive.Games.Remove(_game);
+                            _archive.SaveChanges();
+                            _archive.Games.Load();
+                            //REBINDING WORKS finally that took forever
+                            Binding bd1 = new Binding();
+                            bd1.Source = _archive.Games.Local;
+                            dg_Games.SetBinding(DataGrid.ItemsSourceProperty, bd1);
+                            /*
+                            Database db = new Database();
+                            db.RemoveGameByName(((Game)dg_MyGames.SelectedItem).Title);
+                            dg_MyGames.Items.Refresh();*/
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error could not find Game");
+                        }
                     }
                     break;
                 default:
