@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace VaporArchive
 {
@@ -21,7 +22,7 @@ namespace VaporArchive
     /// </summary>
     public partial class ManagementPortal : Window
     {
-        //Archive Root = new Archive();
+        Archive Root = new Archive();
         ArchiveDatabaseContext _archive = new ArchiveDatabaseContext();
         public ManagementPortal()
         {
@@ -37,24 +38,26 @@ namespace VaporArchive
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CollectionViewSource gameViewSource = ((CollectionViewSource)(this.FindResource("gameViewSource")));
-            if (gameViewSource == null)
-            {
-                MessageBox.Show("Error: gameviewsource is null");
-            }
+            CollectionViewSource gameViewSource = ((CollectionViewSource)(FindResource("gameViewSource")));
+            CollectionViewSource myGameViewSource = ((CollectionViewSource)(FindResource("MyGameViewSource")));
+
             switch (Application.Current.Properties["AccountType"].ToString())
             {
                 case "Customer":
                     break;
                 case "Submitter":
+                    RemoveTabByHeader("All Games");
                     break;
                 case "SysAdmin":
+                    RemoveTabByHeader("My Games");
                     break;
                 default:
                     break;
             }
             _archive.Games.Load();
+
             gameViewSource.Source = _archive.Games.Local;
+            myGameViewSource.Source = _archive.Games.Local.Where(g => g.Submitter.UserName == Application.Current.Properties["Username"].ToString()).ToList();
 
             UpdateView();
         }
@@ -89,12 +92,48 @@ namespace VaporArchive
 
             _archive.SaveChanges();
             dg_Games.Items.Refresh();
+            dg_MyGames.Items.Refresh();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
             _archive.Dispose();
+        }
+
+        public void RemoveTabByHeader(string name)
+        {
+            TabItem ti = tc_Portal.Items.OfType<TabItem>().Where(t => t.Header.ToString() == name).FirstOrDefault();
+            if (ti != null)
+            {
+                tc_Portal.Items.Remove(ti);
+            }
+        }
+
+        private void btn_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            switch (Application.Current.Properties["AccountType"].ToString())
+            {
+                case "Submitter":
+                    if (dg_MyGames.SelectedIndex >= 0 && dg_MyGames.SelectedIndex < dg_MyGames.Items.Count)
+                    {
+                        Database db = new Database();
+                        db.RemoveGameByName(((Game)dg_MyGames.SelectedItem).Title);
+                        dg_MyGames.Items.Refresh();
+                    }
+                    break;
+                case "SysAdmin":
+                    if (dg_Games.SelectedIndex >= 0 && dg_Games.SelectedIndex < dg_Games.Items.Count)
+                    {
+                        Database db = new Database();
+                        db.RemoveGameByName(((Game)dg_Games.SelectedItem).Title);
+                        dg_Games.Items.Refresh();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

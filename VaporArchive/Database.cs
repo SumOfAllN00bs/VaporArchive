@@ -271,5 +271,31 @@ namespace VaporArchive
             }
             return null;
         }
+        public void RemoveGameByName(string _name)
+        {
+            try
+            {
+                using (ArchiveDatabaseContext dbContext = new ArchiveDatabaseContext())
+                {
+                    Game _game = dbContext.Games.Where(g => g.Title == _name).FirstOrDefault();
+                    if (_game == null)
+                    {
+                        MessageBox.Show("Could not find Game to delete");
+                        return;
+                    }
+                    else
+                    {
+                        dbContext.Games.Remove(_game);
+                        dbContext.SaveChanges();
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return;
+        }
     }
 }
