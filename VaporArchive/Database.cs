@@ -297,5 +297,31 @@ namespace VaporArchive
             }
             return;
         }
+        public bool SubmitNewGame(string title, string filepath, int sizekb, DateTime submissiondate, int price, string genre, string submittername)
+        {
+            try
+            {
+                ArchiveDatabaseContext ArchiveContext = new ArchiveDatabaseContext();
+                SubmitterAccount submitter = ArchiveContext.Submitters.Where(s => s.UserName == submittername).FirstOrDefault();
+                Game g = new Game();
+                g.Title = title;
+                g.FilePath = @"Archive\" + submittername + @"\" + filepath.Split('\\').Last();
+                g.SizeKB = sizekb;
+                g.SubmissionDate = submissiondate;
+                g.Price = price;
+                g.Genre = genre;
+                g.Submitter = submitter;
+                g.SubmitterID = submitter.AccountID;
+
+                ArchiveContext.Games.Add(g);
+                ArchiveContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using VaporArchive.Windows;
 
 namespace VaporArchive
 {
@@ -165,6 +166,17 @@ namespace VaporArchive
                     break;
             }
 
+        }
+
+        private void btn_SubmitNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            SubmitNewGame sng = new SubmitNewGame();
+            sng.ShowDialog();
+            _archive.Games.Load();
+            //REBINDING WORKS finally that took forever
+            Binding bd1 = new Binding();
+            bd1.Source = _archive.Games.Local;
+            dg_Games.SetBinding(DataGrid.ItemsSourceProperty, bd1);
         }
     }
 }

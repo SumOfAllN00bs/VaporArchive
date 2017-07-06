@@ -1,6 +1,7 @@
 -hash
 -confirm login
 -account management
-game management
+-game management {done except for submitting game}
+
 vS4n7YQ3eh8vnpAH
 MQCpsswrd101

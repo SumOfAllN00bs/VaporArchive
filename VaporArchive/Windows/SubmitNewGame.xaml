@@ -1,0 +1,23 @@
+﻿<Window x:Class="VaporArchive.Windows.SubmitNewGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VaporArchive.Windows"
+        mc:Ignorable="d"
+        Title="SubmitNewGame" Height="300" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <Button x:Name="btn_Submit" Content="Submit" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="75" Click="btn_Submit_Click"/>
+        <Label x:Name="lbl_Title" Content="Title" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Title" HorizontalAlignment="Left" Height="23" Margin="10,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btn_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75" Click="btn_Cancel_Click"/>
+        <Button x:Name="btn_FindGame" Content="Find Game" HorizontalAlignment="Left" Margin="10,212,0,0" VerticalAlignment="Top" Width="75" Click="btn_FindGame_Click"/>
+        <TextBox x:Name="txt_FileName" HorizontalAlignment="Left" Height="23" Margin="10,184,0,0" TextWrapping="Wrap" Text="FileName" VerticalAlignment="Top" Width="272"/>
+        <TextBlock x:Name="txtb_SubmitterName" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Welcome:" VerticalAlignment="Top" Width="272"/>
+        <Label x:Name="lbl_Genre" Content="Genre" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Genre" HorizontalAlignment="Left" Height="23" Margin="10,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lbl_Price" Content="Price" HorizontalAlignment="Left" Margin="148,33,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Price" HorizontalAlignment="Left" Height="23" Margin="148,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

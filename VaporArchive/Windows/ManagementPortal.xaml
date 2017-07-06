@@ -69,7 +69,7 @@
                     <TextBox x:Name="txt_MyGameGenre"  HorizontalAlignment="Left" Height="23" Margin="391,400,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Genre, ElementName=dg_MyGames}" VerticalAlignment="Top" Width="168"/>
                     <Button x:Name="btn_SaveMyChanges" Content="Save Changes" HorizontalAlignment="Left" Margin="588,400,0,0" VerticalAlignment="Top" Width="168" Height="23" Click="btn_SaveChanges_Click"/>
                     <Button x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="10,469,0,0" VerticalAlignment="Top" Width="185" Click="btn_Remove_Click"/>
-                    <Button x:Name="btn_SubmitNewGame" Content="Submit New Game" HorizontalAlignment="Left" Margin="201,469,0,0" VerticalAlignment="Top" Width="185"/>
+                    <Button x:Name="btn_SubmitNewGame" Content="Submit New Game" HorizontalAlignment="Left" Margin="201,469,0,0" VerticalAlignment="Top" Width="185" Click="btn_SubmitNewGame_Click"/>
 
                 </Grid>
             </TabItem>
