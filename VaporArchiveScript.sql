@@ -55,6 +55,6 @@ values ('Lotto', 'Archive\John And Harry\Lotto.zip', 59, '2017-06-28 11:17:59.60
 --insert into Games
 --values ('TheBettingGame', 'Archive\Mary Quite Contrary\TheBettingGame.zip', 3844, '2017-06-30 11:17:59.600', 0, 'Gambling',5 ,5 );
 select * from Games
-------------reset for testing-----------------
+--------------reset for testing-----------------
 --delete from Games
---where GameID = 29
+--where GameID = 28

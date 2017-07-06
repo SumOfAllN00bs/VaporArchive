@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Windows;
 using System.Security.Cryptography;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace VaporArchive
 {
@@ -315,6 +316,12 @@ namespace VaporArchive
 
                 ArchiveContext.Games.Add(g);
                 ArchiveContext.SaveChanges();
+
+                var rootPath = Directory.GetCurrentDirectory();
+                if (File.Exists(rootPath + @"\Archive\" + submittername))
+                {
+                    File.Move(filepath, rootPath + @"\Archive\" + submittername + @"\" + filepath.Split('\\').Last());
+                }
                 return true;
             }
             catch (Exception ex)
